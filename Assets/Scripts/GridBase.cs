@@ -13,7 +13,7 @@ public class GridBase : MonoBehaviour
     private Vector2 _offset = Vector2.zero;
     private Vector2 _startPosition;
     protected List<GameObject> _gridSquares = new List<GameObject>();
-    protected List<GameObject> _emptySquares = new List<GameObject>();
+    private List<GameObject> _emptySquares = new List<GameObject>();
 
     private void Start()
     {
@@ -22,9 +22,7 @@ public class GridBase : MonoBehaviour
 
     protected virtual void CreateGrid()
     {
-        SpawnGridSquares(_level.levelData.Template, _square);
-        SetGridSquarePositions(_level.levelData.Template);
-        DeleteEmptySquares();
+       
     }
 
     //спавним квадраты, их количество равно количеству элементов в массиве, на месте нулей также добавляем квадраты в список пустых

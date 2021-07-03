@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,15 +11,17 @@ namespace Scripts
         [SerializeField] private GridBase _levelGrid;
         [SerializeField] private Canvas _canvas;
         [SerializeField] private int _levelPartIndex;
+        private List<FigureSquare> _figureSquares = new List<FigureSquare>();
         private RectTransform _rectTransform;
         private Vector3 _defaultScale;
         private Vector3 _defaultPosition;
+        private bool _figurePlaced = false;
 
-        private void Awake()
+        private void Start()
         {
+            CreateGrid();
             _rectTransform = GetComponent<RectTransform>();
             _defaultScale = _rectTransform.localScale;
-            
         }
 
         //в фигуре вместо массива template передаем один из массивов в parts по индексу
@@ -29,6 +32,11 @@ namespace Scripts
             DeleteEmptySquares();
             FixFigureYPosition();
             _defaultPosition = transform.localPosition;
+            
+            foreach (var square in _gridSquares)
+            {
+             _figureSquares.Add(square.GetComponent<FigureSquare>());   
+            }
         }
 
 
@@ -43,8 +51,7 @@ namespace Scripts
             }
             Vector3 groupCenter = sumVector / _gridSquares.Count;
             Vector3 offset = groupCenter - Vector3.zero;
-            Debug.Log(groupCenter);
-            
+
             foreach (var square in _gridSquares)
             {
                 square.transform.localPosition -= offset;
@@ -56,21 +63,57 @@ namespace Scripts
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("PointerDown");
+            
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             Debug.Log("BeginDrag");
-            transform.localScale = new Vector3(_levelGrid.squareScale/squareScale, _levelGrid.squareScale/squareScale, _levelGrid.squareScale/squareScale);
+            if (!_figurePlaced)
+            {
+                transform.localScale = new Vector3(_levelGrid.squareScale / squareScale,
+                    _levelGrid.squareScale / squareScale, _levelGrid.squareScale / squareScale);
+            }
 
+            foreach (var square in _figureSquares)
+            {
+                if (square.GridSquare != null)
+                {
+                    square.GridSquare.DeOccupySquare();
+                }
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
             Debug.Log("EndDrag");
-            transform.localScale = _defaultScale;
-            transform.localPosition = _defaultPosition; //добавить логику
+            
+
+            bool allCanBePlaced = true;
+            foreach (var square in _figureSquares)
+            {
+                if (!square.HoveredOverEmptyGridSquare)
+                {
+                   allCanBePlaced = false;
+                }
+            }
+
+            if (allCanBePlaced)
+            {
+                foreach (var square in _figureSquares)
+                {
+                    square.SetSquarePosOnGrid();
+                    square.GridSquare.OccupySquare();
+                    _figurePlaced = true;
+                }
+            }
+            else
+            {
+                _figurePlaced = false;
+                transform.localPosition = _defaultPosition; 
+                transform.localScale = _defaultScale;
+            }
+            
         }
 
         public void OnDrag(PointerEventData eventData)

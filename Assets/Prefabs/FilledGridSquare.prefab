@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3002843860235243629}
-  - component: {fileID: 4172737223906209500}
   - component: {fileID: 7740135978775478801}
   - component: {fileID: 1541364473151801068}
   - component: {fileID: 2264751194608102999}
-  m_Layer: 5
+  - component: {fileID: -6405398478897088594}
+  m_Layer: 9
   m_Name: FilledGridSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,18 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 85, y: 93}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4172737223906209500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724146656143066047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79c388b382314466855b6d1beb543bf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &7740135978775478801
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -112,5 +100,17 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 60, y: 60}
+  m_Size: {x: 35, y: 35}
   m_EdgeRadius: 0
+--- !u!114 &-6405398478897088594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724146656143066047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fc0a39c3134c8eb6aec9e09ae760b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
