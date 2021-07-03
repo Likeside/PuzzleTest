@@ -68,7 +68,7 @@ namespace Scripts
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log("BeginDrag");
+            
             if (!_figurePlaced)
             {
                 transform.localScale = new Vector3(_levelGrid.squareScale / squareScale,
@@ -80,14 +80,14 @@ namespace Scripts
                 if (square.GridSquare != null)
                 {
                     square.GridSquare.DeOccupySquare();
+                    Debug.Log("Squares empty");
                 }
             }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log("EndDrag");
-            
+
 
             bool allCanBePlaced = true;
             foreach (var square in _figureSquares)
@@ -104,6 +104,7 @@ namespace Scripts
                 {
                     square.SetSquarePosOnGrid();
                     square.GridSquare.OccupySquare();
+                    Debug.Log("Squares occupied");
                     _figurePlaced = true;
                 }
             }

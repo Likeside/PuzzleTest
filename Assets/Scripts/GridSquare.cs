@@ -17,13 +17,14 @@ namespace Scripts
 
         public void DeOccupySquare()
         {
+           
             Occupied = false;
         }
 
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            Occupied = false;
+           // Occupied = false;
         }
     }
 }

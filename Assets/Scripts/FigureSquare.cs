@@ -43,6 +43,7 @@ namespace Scripts
         private void OnTriggerExit2D(Collider2D other)
         {
             HoveredOverEmptyGridSquare = false;
+            GridSquare = null;
             ResetSquarePos();
         }
     }
