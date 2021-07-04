@@ -7,8 +7,8 @@ namespace Scripts
     public class FigureSquare: MonoBehaviour
     {
         public GridSquare GridSquare { get; set; }
-        
-        public bool HoveredOverEmptyGridSquare { get; private set; } = false;
+
+        public bool HoveredOverEmptyGridSquare { get; private set; }
         private Vector3 _defaultPos;
         private Vector3 _posOnGrid;
 
@@ -31,8 +31,12 @@ namespace Scripts
         {
             if (other.gameObject.TryGetComponent(out GridSquare gridSquare))
             {
+                Debug.Log("I am on the grid square");
+
                 if (!gridSquare.Occupied)
                 {
+                    Debug.Log("I am on the empty grid square");
+
                     HoveredOverEmptyGridSquare = true;
                     _posOnGrid = other.gameObject.transform.position;
                     GridSquare = gridSquare;
@@ -42,6 +46,8 @@ namespace Scripts
 
         private void OnTriggerExit2D(Collider2D other)
         {
+            Debug.Log("I left the grid square");
+
             HoveredOverEmptyGridSquare = false;
             GridSquare = null;
             ResetSquarePos();

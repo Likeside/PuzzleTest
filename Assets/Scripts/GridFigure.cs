@@ -3,26 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Scripts.SaveSystem;
 
 namespace Scripts
 {
-    public sealed class GridFigure: GridBase, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+    public sealed class GridFigure: GridBase, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         [SerializeField] private GridBase _levelGrid;
         [SerializeField] private Canvas _canvas;
-        [SerializeField] private int _levelPartIndex;
+        [SerializeField] public int _levelPartIndex;
         private List<FigureSquare> _figureSquares = new List<FigureSquare>();
         private RectTransform _rectTransform;
         private Vector3 _defaultScale;
         private Vector3 _defaultPosition;
         private bool _figurePlaced = false;
 
+        private bool firstUpdate = true;
+
         private void Start()
         {
             CreateGrid();
             _rectTransform = GetComponent<RectTransform>();
             _defaultScale = _rectTransform.localScale;
+            LoadPosition();
+            
         }
+        
+        private void LoadPosition()
+        {
+            SavedData savedData = SaveSystem.SaveSystem.LoadGame();
+            Debug.Log(String.Join(",", savedData.listOfFigurePositions[_levelPartIndex]));
+            _rectTransform.anchoredPosition = new Vector2(savedData.listOfFigurePositions[_levelPartIndex][0],
+                savedData.listOfFigurePositions[_levelPartIndex][1]);
+            EnlargeFigure();
+            Invoke(nameof(TryPlaceFigure), 0.01f);
+        }
+
+    
 
         //в фигуре вместо массива template передаем один из массивов в parts по индексу
         protected override void CreateGrid()
@@ -60,19 +77,13 @@ namespace Scripts
 
 
         #region Имплементация интерфейсов для драг'н'дропа
-        
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            
-        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             
             if (!_figurePlaced)
             {
-                transform.localScale = new Vector3(_levelGrid.squareScale / squareScale,
-                    _levelGrid.squareScale / squareScale, _levelGrid.squareScale / squareScale);
+                EnlargeFigure();
             }
 
             foreach (var square in _figureSquares)
@@ -84,17 +95,27 @@ namespace Scripts
                 }
             }
         }
-
         public void OnEndDrag(PointerEventData eventData)
         {
+            TryPlaceFigure();
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            _rectTransform.anchoredPosition += eventData.delta/ _canvas.scaleFactor;
+        }
+        
+        #endregion
 
 
+        public void TryPlaceFigure()
+        {
             bool allCanBePlaced = true;
             foreach (var square in _figureSquares)
             {
                 if (!square.HoveredOverEmptyGridSquare)
                 {
-                   allCanBePlaced = false;
+                    allCanBePlaced = false;
                 }
             }
 
@@ -104,7 +125,6 @@ namespace Scripts
                 {
                     square.SetSquarePosOnGrid();
                     square.GridSquare.OccupySquare();
-                    Debug.Log("Squares occupied");
                     _figurePlaced = true;
                 }
             }
@@ -114,15 +134,13 @@ namespace Scripts
                 transform.localPosition = _defaultPosition; 
                 transform.localScale = _defaultScale;
             }
-            
+            SaveSystem.SaveSystem.SaveGame();
         }
 
-        public void OnDrag(PointerEventData eventData)
+        private void EnlargeFigure()
         {
-            _rectTransform.anchoredPosition += eventData.delta/ _canvas.scaleFactor;
+            transform.localScale = new Vector3(_levelGrid.squareScale / squareScale,
+                _levelGrid.squareScale / squareScale, _levelGrid.squareScale / squareScale);
         }
-        
-        
-        #endregion
     }
 }
