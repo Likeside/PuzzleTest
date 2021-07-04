@@ -11,6 +11,7 @@ namespace Scripts
     {
         [SerializeField] private GridBase _levelGrid;
         [SerializeField] private Canvas _canvas;
+        [SerializeField] private Vector2 _dragOffset;
         [SerializeField] public int _levelPartIndex;
         private List<FigureSquare> _figureSquares = new List<FigureSquare>();
         private RectTransform _rectTransform;
@@ -40,7 +41,7 @@ namespace Scripts
             _rectTransform.anchoredPosition = new Vector2(savedData.listOfFigurePositions[_levelPartIndex][0],
                 savedData.listOfFigurePositions[_levelPartIndex][1]);
             EnlargeFigure();
-            Invoke(nameof(TryPlaceFigure), 0.03f);
+            Invoke(nameof(TryPlaceFigure), 0.05f);
         }
         
         //в фигуре вместо массива template передаем один из массивов в parts по индексу
@@ -82,7 +83,7 @@ namespace Scripts
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            
+            _rectTransform.anchoredPosition += _dragOffset;
             if (!_figurePlaced)
             {
                 EnlargeFigure();
@@ -103,7 +104,7 @@ namespace Scripts
 
         public void OnDrag(PointerEventData eventData)
         {
-            _rectTransform.anchoredPosition += eventData.delta/ _canvas.scaleFactor;
+            _rectTransform.anchoredPosition += (eventData.delta / _canvas.scaleFactor);
         }
         
         #endregion
