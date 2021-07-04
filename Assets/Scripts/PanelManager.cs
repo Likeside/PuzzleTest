@@ -18,12 +18,12 @@ namespace Scripts
 
         public void ShowLevelCompletePanel()
         {
-            _levelCompletePanel.SetActive(!_gameCompletePanel.activeSelf);
+            _levelCompletePanel.SetActive(!_levelCompletePanel.activeSelf);
         }
 
         public void ShowGameCompletePanel()
         {
-            _gameCompletePanel.SetActive(true);
+            _gameCompletePanel.SetActive(!_gameCompletePanel.activeSelf);
         }
     }
 }
