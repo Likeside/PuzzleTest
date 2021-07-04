@@ -40,7 +40,7 @@ namespace Scripts
             _rectTransform.anchoredPosition = new Vector2(savedData.listOfFigurePositions[_levelPartIndex][0],
                 savedData.listOfFigurePositions[_levelPartIndex][1]);
             EnlargeFigure();
-            Invoke(nameof(TryPlaceFigure), 0.05f);
+            Invoke(nameof(TryPlaceFigure), 0.03f);
         }
         
         //в фигуре вместо массива template передаем один из массивов в parts по индексу

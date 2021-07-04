@@ -197,7 +197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 96, y: 338}
+  m_AnchoredPosition: {x: 113, y: 338}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &178245225
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9fc5045043472ebb9a219281a6ab7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squareScale: 0.7
+  squareScale: 0.8
   _level: {fileID: 380206638}
   _square: {fileID: 1724146656143066047, guid: 172fc1a436090417fb81607c0c2ec4f3, type: 3}
   _levelGrid: {fileID: 1931370957}
@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -288, y: 337.99994}
+  m_AnchoredPosition: {x: -342, y: 337.99994}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473343143
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9fc5045043472ebb9a219281a6ab7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squareScale: 0.7
+  squareScale: 0.8
   _level: {fileID: 380206638}
   _square: {fileID: 1724146656143066047, guid: 172fc1a436090417fb81607c0c2ec4f3, type: 3}
   _levelGrid: {fileID: 1931370957}
@@ -673,7 +673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 288, y: 337.99994}
+  m_AnchoredPosition: {x: 342, y: 337.99994}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674367787
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9fc5045043472ebb9a219281a6ab7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squareScale: 0.7
+  squareScale: 0.8
   _level: {fileID: 380206638}
   _square: {fileID: 1724146656143066047, guid: 172fc1a436090417fb81607c0c2ec4f3, type: 3}
   _levelGrid: {fileID: 1931370957}
@@ -805,10 +805,10 @@ RectTransform:
   m_Father: {fileID: 1502634477}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -358, y: -22}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 260, y: -200}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966575967
 MonoBehaviour:
@@ -1310,7 +1310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -96, y: 337.99994}
+  m_AnchoredPosition: {x: -113, y: 337.99994}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1835472379
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9fc5045043472ebb9a219281a6ab7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squareScale: 0.7
+  squareScale: 0.8
   _level: {fileID: 380206638}
   _square: {fileID: 1724146656143066047, guid: 172fc1a436090417fb81607c0c2ec4f3, type: 3}
   _levelGrid: {fileID: 1931370957}
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4da67018354e828514c46098f60904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squareScale: 1.2
+  squareScale: 1.3
   _level: {fileID: 380206638}
   _square: {fileID: 1724146656143066047, guid: 7278ae8037367a8bfb348d91a0d631d5, type: 3}
   levelIndex: 1
