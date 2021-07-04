@@ -7,10 +7,13 @@ namespace Scripts.SaveSystem
     [Serializable]
     public class SavedData
     {
+        public int levelsCompleted;
         public float[][] listOfFigurePositions;
         
         public SavedData()
         {
+            levelsCompleted = GameObject.FindObjectOfType<LevelTracker>().LevelsCompleted;
+
             var allFigures = GameObject.FindObjectsOfType<GridFigure>();
             listOfFigurePositions = new float[allFigures.Length][];
             

@@ -12,7 +12,7 @@ namespace Scripts.SaveSystem
         public static void SaveGame()
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(_path, FileMode.Create);
+            FileStream stream = new FileStream(_path, FileMode.OpenOrCreate);
 
             SavedData savedData = new SavedData();
             
@@ -36,31 +36,10 @@ namespace Scripts.SaveSystem
                 return LoadGame();
             }
         }
-        
-       /* public static void SaveGame()
-        {
-            SavedData savedData = new SavedData();
-            string data = JsonUtility.ToJson(savedData);
-            Debug.Log(data);
-            File.WriteAllText(_path, data);
-        }
 
-        public static SavedData LoadGame()
+        public static void ClearData()
         {
-            if (File.Exists(_path))
-            {
-                Debug.Log("File exists");
-                string savedJson = File.ReadAllText(_path);
-                SavedData savedData = JsonUtility.FromJson<SavedData>(savedJson);
-                return savedData;
-            }
-            else
-            {
-               // SaveGame();
-               // return LoadGame();
-               return null;
-            }
+            File.Delete(_path);
         }
-        */
     }
 }

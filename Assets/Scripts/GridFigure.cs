@@ -17,9 +17,7 @@ namespace Scripts
         private Vector3 _defaultScale;
         private Vector3 _defaultPosition;
         private bool _figurePlaced = false;
-
-        private bool firstUpdate = true;
-
+        
         private void Start()
         {
             CreateGrid();
@@ -29,18 +27,22 @@ namespace Scripts
             
         }
         
+        //загружаем позицию и пытаемся поставить фигуру на место
         private void LoadPosition()
         {
             SavedData savedData = SaveSystem.SaveSystem.LoadGame();
-            Debug.Log(String.Join(",", savedData.listOfFigurePositions[_levelPartIndex]));
+            //если мы еще не сохранялись на уровне или перешли на другой уровень, то сохраняем текущие позиции
+            if (!savedData.listOfFigurePositions.Any() || savedData.listOfFigurePositions.Length != FindObjectsOfType<GridFigure>().Length) 
+            {
+                SaveSystem.SaveSystem.SaveGame();
+            }
+            savedData = SaveSystem.SaveSystem.LoadGame();
             _rectTransform.anchoredPosition = new Vector2(savedData.listOfFigurePositions[_levelPartIndex][0],
                 savedData.listOfFigurePositions[_levelPartIndex][1]);
             EnlargeFigure();
-            Invoke(nameof(TryPlaceFigure), 0.01f);
+            Invoke(nameof(TryPlaceFigure), 0.05f);
         }
-
-    
-
+        
         //в фигуре вместо массива template передаем один из массивов в parts по индексу
         protected override void CreateGrid()
         {
@@ -91,7 +93,6 @@ namespace Scripts
                 if (square.GridSquare != null)
                 {
                     square.GridSquare.DeOccupySquare();
-                    Debug.Log("Squares empty");
                 }
             }
         }
@@ -130,11 +131,17 @@ namespace Scripts
             }
             else
             {
-                _figurePlaced = false;
-                transform.localPosition = _defaultPosition; 
-                transform.localScale = _defaultScale;
+                ResetPosition();
             }
             SaveSystem.SaveSystem.SaveGame();
+        }
+        
+        public void ResetPosition()
+        {
+            _figurePlaced = false;
+            transform.localPosition = _defaultPosition; 
+            transform.localScale = _defaultScale;
+           
         }
 
         private void EnlargeFigure()
@@ -142,5 +149,7 @@ namespace Scripts
             transform.localScale = new Vector3(_levelGrid.squareScale / squareScale,
                 _levelGrid.squareScale / squareScale, _levelGrid.squareScale / squareScale);
         }
+
+       
     }
 }

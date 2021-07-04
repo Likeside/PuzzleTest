@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Scripts
 {
     public sealed class GridLevel: GridBase
     {
+        [SerializeField] public int levelIndex;
         public Action OnLevelComplete;
         private List<GridSquare> _gridSquaresMB = new List<GridSquare>();
         protected override void CreateGrid()
